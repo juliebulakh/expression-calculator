@@ -3,36 +3,36 @@ function eval() {
     return;
 }
 
-const priority = {
-    "+": 1,
-    "-": 1,
-    "*": 2,
-    "/": 2
-};
-const operationMath = {
-    "+": (a, b) => +a + +b,
-    "-": (a, b) => a - b,
-    "*": (a, b) => a * b,
-    "/": (a, b) => a / b
-};
-let stack = [];
-let stackOp = [];
-
-function calculation(a, b) {
-    a.splice(-2, 2, operationMath[b[b.length - 1]](a[a.length - 2], a[a.length - 1]));
-    b.splice(-1, 1);
-}
-
-
 function expressionCalculator(expr) {
+
+    const priority = {
+        "+": 1,
+        "-": 1,
+        "*": 2,
+        "/": 2
+    };
+    const operationMath = {
+        "+": (a, b) => +a + +b,
+        "-": (a, b) => a - b,
+        "*": (a, b) => a * b,
+        "/": (a, b) => a / b
+    };
+    let stack = [];
+    let stackOp = [];
     let exp = expr.replace(/\s+/g, "").split(/(\D)/).filter(a => a !== "");
     let bracket = "()";
+    
+    function calculation(a, b) {
+        a.splice(-2, 2, operationMath[b[b.length - 1]](a[a.length - 2], a[a.length - 1]));
+        b.splice(-1, 1);
+    }
+
 
     if (exp.filter(a => a == bracket[0]).length != exp.filter(a => a == bracket[1]).length) {
-        return "ExpressionError: Brackets must be paired";
+        throw new Error("ExpressionError: Brackets must be paired");
     }
     if (exp.join("").includes("/0")) {
-        return "TypeError: Division by zero.";
+        throw new Error("TypeError: Division by zero.");
     }
 
     for (i = 0; i < exp.length; i++) {
