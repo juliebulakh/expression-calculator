@@ -31,7 +31,7 @@ function expressionCalculator(expr) {
     if (exp.filter(a => a == bracket[0]).length != exp.filter(a => a == bracket[1]).length) {
         throw new Error("ExpressionError: Brackets must be paired");
     }
-    if (expr.includes("/0")) {
+    if (exp.join("").includes("/0")) {
         throw new Error("TypeError: Division by zero.");
     }
 
