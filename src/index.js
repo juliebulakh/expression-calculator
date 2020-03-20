@@ -56,7 +56,7 @@ function expressionCalculator(expr) {
     for (i = stackOp.length - 1; i >= 0; i--) {
         calculation(stack, stackOp);
     }
-    return stack;
+    return Number(stack);
 }
 
 module.exports = {
