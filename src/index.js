@@ -29,10 +29,10 @@ function expressionCalculator(expr) {
     let bracket = "()";
 
     if (exp.filter(a => a == bracket[0]).length != exp.filter(a => a == bracket[1]).length) {
-        throw new Error("ExpressionError: Brackets must be paired");
+        return "ExpressionError: Brackets must be paired";
     }
     if (exp.join("").includes("/0")) {
-        throw new Error("TypeError: Division by zero.");
+        return "TypeError: Division by zero.";
     }
 
     for (i = 0; i < exp.length; i++) {
